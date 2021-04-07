@@ -1,0 +1,19 @@
+{
+  "name": "kanban-client",
+  "version": "1.0.0",
+  "description": "client site to implement agile and DevOps software development.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihsnmuh/kanban-client.git"
+  },
+  "author": "Muhammad Ihsan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ihsnmuh/kanban-client/issues"
+  },
+  "homepage": "https://github.com/ihsnmuh/kanban-client#readme"
+}

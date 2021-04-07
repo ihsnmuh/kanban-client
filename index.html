@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="/asset/kanban-icon.svg"
+      type="image/svg+xml"
+    />
+    <title>KanbanMu App</title>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav
+      class="navbar sticky-top navbar-expand-lg navbar-light ms-md-auto"
+      style="background-color: #e3f2fd"
+    >
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" href="#" style="font-weight: bold">
+            <img
+              src="/asset//kanban-icon.svg"
+              alt=""
+              width="30"
+              height="30"
+              class="d-inline-block align-text-top"
+            />
+            Kanban'Mu
+          </a>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#AddTaskModal"
+                >Add New Task</a
+              >
+            </li>
+          </ul>
+          <div>
+            <button class="btn btn-outline-info btn-sm rounded">Login</button>
+            <button class="btn btn-outline-warning btn-sm rounded">
+              Register
+            </button>
+            <button class="btn btn-outline-danger btn-sm rounded">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Body Card -->
+    <div class="container-fluid p-3 rounded" id="body-card">
+      <div class="row">
+        <!-- BACKLOG LIST -->
+        <div class="col-lg-3 col-md-6 col-12" id="backlog-list">
+          <div class="container bg-danger shadow-lg border-radius">
+            <div class="row">
+              <div class="col mt-3">
+                <h4 class="text-center">Backlog</h4>
+                <hr class="garis" />
+
+                <!-- Task Card -->
+                <div id="task-list">
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- batas -->
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <hr class="garis" />
+              <button
+                class="btn btn-light mb-3 shadow"
+                data-bs-toggle="modal"
+                data-bs-target="#AddTaskModal"
+                type="button"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TODO LIST -->
+        <div class="col-lg-3 col-md-6 col-12" id="todo-list">
+          <div class="container bg-warning shadow-lg border-radius">
+            <div class="row">
+              <div class="col mt-3">
+                <h4 class="text-center">Todo</h4>
+                <hr class="garis" />
+
+                <!-- Task Card -->
+                <div id="task-list">
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+                  <!-- batas -->
+                </div>
+              </div>
+              <div class="d-grid gap-2">
+                <hr class="garis" />
+                <button
+                  class="btn btn-light mb-3 shadow"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#AddTaskModal"
+                >
+                  Add Task
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOING LIST -->
+        <div class="col-lg-3 col-md-6 col-12" id="doing-list">
+          <div class="container bg-primary shadow-lg border-radius">
+            <div class="row">
+              <div class="col mt-3">
+                <h4 class="text-center">Doing</h4>
+                <hr class="garis" />
+
+                <!-- Task Card -->
+                <div id="task-list">
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- batas -->
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <hr class="garis" />
+              <button
+                class="btn btn-light mb-3 shadow"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#AddTaskModal"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DONE LIST -->
+        <div class="col-lg-3 col-md-6 col-12" id="done-list">
+          <div class="container bg-success shadow-lg border-radius">
+            <div class="row">
+              <div class="col mt-3">
+                <h4 class="text-center">Done</h4>
+                <hr class="garis" />
+
+                <!-- Task Card -->
+                <div id="task-list">
+                  <div class="card mb-3">
+                    <div class="card-header">Task Title</div>
+                    <div class="card-body">
+                      <p class="card-subtitle mb-2 text-muted">Owner Name</p>
+                      <p class="card-text">
+                        Disini berisi description dari task
+                      </p>
+                      <p class="card-text">Priority: High</p>
+                      <button
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EditTaskModal"
+                      >
+                        Edit
+                      </button>
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- batas -->
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <hr class="garis" />
+              <button
+                class="btn btn-light mb-3 shadow"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#AddTaskModal"
+              >
+                Add Task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login -->
+    <div id="form-login">
+      <div class="container mt-3 md-3">
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <div class="card bg-light border-radius">
+              <div class="card-body">
+                <form id="login">
+                  <center>
+                    <h3 class="mb-3" style="font-weight: bold; color: #0d6efd">
+                      Login
+                    </h3>
+                    <hr style="border: 1px solid black" />
+                  </center>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email-login"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password-login"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary col-3">
+                    Login
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register -->
+    <div id="form-register">
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col-md-4 offset-md-4">
+            <div class="card bg-light border-radius">
+              <div class="card-body">
+                <form id="register">
+                  <center>
+                    <h3 class="mb-3" style="font-weight: bold; color: #0d6efd">
+                      Register
+                    </h3>
+                    <hr style="border: 1px solid black" />
+                  </center>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email address:</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email-register"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="username-register"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password-register"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Card Modal-->
+    <div
+      class="modal fade border-radius"
+      id="AddTaskModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content border-radius">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">Title Task</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+              />
+              <label for="floatingPassword">Description</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="floatingSelectCategory"
+                aria-label="Floating label select example"
+              >
+                <option selected>Open this select category</option>
+                <option value="backlog">Backlog</option>
+                <option value="todo">Todo</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+              </select>
+              <label for="floatingSelect">Category</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="floatingSelectPriority"
+                aria-label="Floating label select example"
+              >
+                <option selected>Open this select Priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <label for="floatingSelect">Level Priority</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Card Modal-->
+    <div
+      class="modal fade"
+      id="EditTaskModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content border-radius">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+              />
+              <label for="floatingInput">Title Task</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+              />
+              <label for="floatingPassword">Description</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="floatingSelectCategory"
+                aria-label="Floating label select example"
+              >
+                <option selected>Open this select category</option>
+                <option value="backlog">Backlog</option>
+                <option value="todo">Todo</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+              </select>
+              <label for="floatingSelect">Category</label>
+            </div>
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="floatingSelectPriority"
+                aria-label="Floating label select example"
+              >
+                <option selected>Open this select Priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <label for="floatingSelect">Level Priority</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+      integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/main.js"></script>
+  </body>
+</html>
