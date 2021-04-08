@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/ihsnmuh/kanban-client/issues"
   },
-  "homepage": "https://github.com/ihsnmuh/kanban-client#readme"
+  "homepage": "https://github.com/ihsnmuh/kanban-client#readme",
+  "keywords": [],
+  "dependencies": {
+    "axios": "^0.21.1",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "vue-template-compiler": "^2.6.12"
+  }
 }
