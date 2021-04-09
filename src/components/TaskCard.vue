@@ -13,6 +13,7 @@
         class="btn btn-info btn-sm"
         data-bs-toggle="modal"
         data-bs-target="#EditTaskModal"
+        @click.prevent="editTask(task.id)"
       >
         Edit
       </button>
@@ -21,6 +22,9 @@
         @click.prevent="deleteTask(task.id)"
       >
         Delete
+      </button>
+      <button class="btn btn-success btn-sm" @click.prevent="nextTask(task.id)">
+        Next
       </button>
     </div>
   </div>
@@ -34,6 +38,13 @@ export default {
     deleteTask(id) {
       console.log(">>>>> Button Delete", id);
       this.$emit("deleteTask", id);
+    },
+    editTask(id) {
+      console.log(">>>>> Button Edit", id);
+      this.$emit("editTask", id);
+    },
+    nextTask(id) {
+      console.log(">>>>> Button Next", id);
     },
   },
 };

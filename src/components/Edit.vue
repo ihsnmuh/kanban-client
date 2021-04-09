@@ -20,41 +20,35 @@
         </div>
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-            />
+            <input type="text" class="form-control" v-model="dataEdit.title" />
             <label for="floatingInput">Title Task</label>
           </div>
           <div class="form-floating mb-3">
             <input
               type="text"
               class="form-control"
-              id="floatingPassword"
-              placeholder="Password"
+              v-model="dataEdit.description"
             />
             <label for="floatingPassword">Description</label>
           </div>
           <div class="form-floating mb-3">
             <select
               class="form-select"
-              id="floatingSelectCategory"
+              v-model="dataEdit.category"
               aria-label="Floating label select example"
             >
               <option selected>Open this select category</option>
-              <option value="backlog">Backlog</option>
-              <option value="todo">Todo</option>
-              <option value="doing">Doing</option>
-              <option value="done">Done</option>
+              <option value="Backlog">Backlog</option>
+              <option value="Todo">Todo</option>
+              <option value="Doing">Doing</option>
+              <option value="Done">Done</option>
             </select>
             <label for="floatingSelect">Category</label>
           </div>
           <div class="form-floating mb-3">
             <select
               class="form-select"
-              id="floatingSelectPriority"
+              v-model="dataEdit.priority"
               aria-label="Floating label select example"
             >
               <option selected>Open this select Priority</option>
@@ -73,8 +67,13 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">
-            Save changes
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            @click="updateTask"
+          >
+            Update
           </button>
         </div>
       </div>
@@ -85,6 +84,40 @@
 <script>
 export default {
   name: "Edit",
+  props: ["dataEdit"],
+  data() {
+    return {};
+  },
+  methods: {
+    updateTask() {
+      let dataNew = {
+        id: this.dataEdit.id,
+        title: this.dataEdit.title,
+        description: this.dataEdit.description,
+        category: this.dataEdit.category,
+        priority: this.dataEdit.priority,
+        userId: this.dataEdit.userId,
+      };
+
+      console.log(dataNew);
+
+      this.$emit("updateTask", dataNew);
+
+      //kosongin lagi
+      this.title = "";
+      this.description = "";
+      this.category = "-- select category --";
+      this.priority = "-- select level priority --";
+    },
+  },
+  // created() {
+  //   if (this.dataEdit) {
+  //     this.title = this.dataEdit.title;
+  //     this.description = this.dataEdit.description;
+  //     this.category = this.dataEdit.category;
+  //     this.priority = this.dataEdit.priority;
+  //   }
+  // },
 };
 </script>
 

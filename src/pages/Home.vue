@@ -8,6 +8,7 @@
         :category="cat"
         :tasks="tasks"
         @deleteTask="deleteTaskNew"
+        @editTask="editTaskNew"
       ></Category>
     </div>
   </div>
@@ -15,7 +16,6 @@
 
 <script>
 import Category from "../components/Category";
-import axios from "../api/axios";
 export default {
   name: "Home",
   data() {
@@ -32,6 +32,9 @@ export default {
     },
     deleteTaskNew(id) {
       this.$emit("deleteTask", id);
+    },
+    editTaskNew(id) {
+      this.$emit("editTask", id);
     },
   },
   created() {

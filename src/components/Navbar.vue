@@ -41,7 +41,7 @@
               Add Task
             </button>
             <button
-              @click="logout"
+              @click.prevent="logout"
               class="btn btn-danger btn-sm rounded"
               type="button"
             >
@@ -78,9 +78,9 @@ export default {
       this.$emit("changePage", page);
     },
     logout() {
-      localStorage.clear();
-      this.$emit("isLogin", false);
       this.$emit("changePage", "loginPage");
+      this.$emit("setLogin", false);
+      localStorage.clear();
     },
   },
 };

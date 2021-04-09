@@ -1,12 +1,17 @@
 <template>
   <div>
     <!-- Mewariskan pake V bind -->
-    <Navbar :isLoginChild="isLogin" @changePage="changePage"></Navbar>
+    <Navbar
+      :isLoginChild="isLogin"
+      @changePage="changePage"
+      @setLogin="setLogin"
+    ></Navbar>
     <Home
       v-if="activePage === 'homePage'"
       :tasks="tasks"
       @fetchTasks="fetchTasks"
       @deleteTask="deleteTask"
+      @editTask="getTaskById"
     ></Home>
     <Login
       v-else-if="activePage === 'loginPage'"
@@ -18,7 +23,7 @@
       @changePage="changePage"
     ></Register>
     <Add @addTask="addTask"></Add>
-    <Edit></Edit>
+    <Edit @updateTask="updateTask" :dataEdit="dataEdit"></Edit>
   </div>
 </template>
 
@@ -40,6 +45,7 @@ export default {
       activePage: "loginPage",
       isLogin: false,
       tasks: [],
+      dataEdit: {},
     };
   },
   components: { Home, Login, Register, Add, Edit, Navbar },
@@ -88,6 +94,38 @@ export default {
         .then((response) => {
           //   console.log(response);
           console.log("Success to delete");
+          this.fetchTasks();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getTaskById(id) {
+      axios
+        .get(`/tasks/${id}`, {
+          headers: { access_token: localStorage.access_token },
+        })
+        .then(({ data }) => {
+          console.log(data, "<<<<<< DIDATA");
+          this.dataEdit = data;
+        })
+        .catch((err) => {
+          console.log(err, "<<<<< INI ERROR Get ID");
+        });
+    },
+    updateTask(payload) {
+      let { id, title, description, category, priority } = payload;
+      axios
+        .put(
+          `/tasks/${id}`,
+          { title, description, category, priority },
+          {
+            headers: { access_token: localStorage.access_token },
+          }
+        )
+        .then((response) => {
+          //   console.log(response);
+          console.log("Success to Update");
           this.fetchTasks();
         })
         .catch((err) => {

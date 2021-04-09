@@ -13,6 +13,7 @@
               :key="task.id"
               :task="task"
               @deleteTask="deleteTaskNew"
+              @editTask="editTaskNew"
             ></TaskCard>
           </div>
           <!-- batas -->
@@ -47,6 +48,9 @@ export default {
   methods: {
     deleteTaskNew(id) {
       this.$emit("deleteTask", id);
+    },
+    editTaskNew(id) {
+      this.$emit("editTask", id);
     },
   },
 };
