@@ -12,6 +12,7 @@
               v-for="task in groupesTasks"
               :key="task.id"
               :task="task"
+              @deleteTask="deleteTaskNew"
             ></TaskCard>
           </div>
           <!-- batas -->
@@ -41,6 +42,11 @@ export default {
   computed: {
     groupesTasks() {
       return this.tasks.filter((task) => task.category == this.category);
+    },
+  },
+  methods: {
+    deleteTaskNew(id) {
+      this.$emit("deleteTask", id);
     },
   },
 };

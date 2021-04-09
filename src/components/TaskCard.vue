@@ -16,7 +16,12 @@
       >
         Edit
       </button>
-      <button class="btn btn-danger btn-sm">Delete</button>
+      <button
+        class="btn btn-danger btn-sm"
+        @click.prevent="deleteTask(task.id)"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </template>
@@ -25,6 +30,12 @@
 export default {
   name: "TaskCard",
   props: ["task"],
+  methods: {
+    deleteTask(id) {
+      console.log(">>>>> Button Delete", id);
+      this.$emit("deleteTask", id);
+    },
+  },
 };
 </script>
 

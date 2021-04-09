@@ -7,6 +7,7 @@
         :key="i"
         :category="cat"
         :tasks="tasks"
+        @deleteTask="deleteTaskNew"
       ></Category>
     </div>
   </div>
@@ -28,6 +29,9 @@ export default {
   methods: {
     fetchTasks() {
       this.$emit("fetchTasks");
+    },
+    deleteTaskNew(id) {
+      this.$emit("deleteTask", id);
     },
   },
   created() {

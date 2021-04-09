@@ -6,6 +6,7 @@
       v-if="activePage === 'homePage'"
       :tasks="tasks"
       @fetchTasks="fetchTasks"
+      @deleteTask="deleteTask"
     ></Home>
     <Login
       v-else-if="activePage === 'loginPage'"
@@ -52,7 +53,7 @@ export default {
     },
     fetchTasks() {
       axios
-        .get("./tasks", {
+        .get("/tasks", {
           headers: {
             access_token: localStorage.access_token,
           },
@@ -77,6 +78,20 @@ export default {
         })
         .catch((err) => {
           console.log(err, "<<<<< ERROR ADD TASK");
+        });
+    },
+    deleteTask(id) {
+      axios
+        .delete(`/tasks/${id}`, {
+          headers: { access_token: localStorage.access_token },
+        })
+        .then((response) => {
+          //   console.log(response);
+          console.log("Success to delete");
+          this.fetchTasks();
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
