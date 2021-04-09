@@ -9,6 +9,8 @@
         :tasks="tasks"
         @deleteTask="deleteTaskNew"
         @editTask="editTaskNew"
+        @nextTask="nextTaskNew"
+        @backTask="backTaskNew"
       ></Category>
     </div>
   </div>
@@ -35,6 +37,12 @@ export default {
     },
     editTaskNew(id) {
       this.$emit("editTask", id);
+    },
+    nextTaskNew(id) {
+      this.$emit("nextTask", id);
+    },
+    backTaskNew(id) {
+      this.$emit("backTask", id);
     },
   },
   created() {

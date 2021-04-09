@@ -10,7 +10,14 @@
       </p>
       <p class="card-text">Priority: {{ task.priority }}</p>
       <button
-        class="btn btn-info btn-sm"
+        v-if="task.category !== 'Backlog'"
+        class="btn btn-outline-warning btn-sm"
+        @click.prevent="backTask(task.id)"
+      >
+        ←
+      </button>
+      <button
+        class="btn btn-primary btn-sm"
         data-bs-toggle="modal"
         data-bs-target="#EditTaskModal"
         @click.prevent="editTask(task.id)"
@@ -23,8 +30,12 @@
       >
         Delete
       </button>
-      <button class="btn btn-success btn-sm" @click.prevent="nextTask(task.id)">
-        Next
+      <button
+        v-if="task.category !== 'Done'"
+        class="btn btn-outline-success btn-sm"
+        @click.prevent="nextTask(task.id)"
+      >
+        →
       </button>
     </div>
   </div>
@@ -44,7 +55,16 @@ export default {
       this.$emit("editTask", id);
     },
     nextTask(id) {
-      console.log(">>>>> Button Next", id);
+      console.log(this.task.category);
+      const payload = { id, category: this.task.category };
+      console.log(">>>>> Button Next", payload);
+      this.$emit("nextTask", payload);
+    },
+    backTask(id) {
+      console.log(this.task.category);
+      const payload = { id, category: this.task.category };
+      console.log(">>>>> Button Back", payload);
+      this.$emit("backTask", payload);
     },
   },
 };

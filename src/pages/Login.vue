@@ -37,14 +37,16 @@
                       Login
                     </button>
                   </div>
-                  <div class="col">
-                    <div
-                      class="g-signin2 col-6"
-                      data-onsuccess="onSignIn"
-                    ></div>
-                  </div>
                 </div>
               </form>
+              <div class="col">
+                <button
+                  v-google-signin-button="clientId"
+                  class="google-signin-button"
+                >
+                  Continue with Google
+                </button>
+              </div>
             </div>
           </div>
         </div>

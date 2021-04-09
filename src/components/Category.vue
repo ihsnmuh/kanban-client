@@ -1,7 +1,7 @@
 <template>
   <!-- BACKLOG LIST -->
   <div class="col-lg-3 col-md-6 col-12" id="backlog-list">
-    <div class="container bg-primary shadow-lg border-radius">
+    <div :class="changeColor">
       <div class="row">
         <div class="col mt-3">
           <h4 class="text-center">{{ category }}</h4>
@@ -14,6 +14,8 @@
               :task="task"
               @deleteTask="deleteTaskNew"
               @editTask="editTaskNew"
+              @nextTask="nextTaskNew"
+              @backTask="backTaskNew"
             ></TaskCard>
           </div>
           <!-- batas -->
@@ -44,6 +46,28 @@ export default {
     groupesTasks() {
       return this.tasks.filter((task) => task.category == this.category);
     },
+    changeColor() {
+      let color = "";
+
+      switch (this.category) {
+        case "Backlog":
+          color = this.styles[0];
+          break;
+        case "Todo":
+          color = this.styles[1];
+          break;
+        case "Doing":
+          color = this.styles[2];
+          break;
+        case "Done":
+          color = this.styles[3];
+          break;
+        default:
+          break;
+      }
+
+      return color;
+    },
   },
   methods: {
     deleteTaskNew(id) {
@@ -52,6 +76,22 @@ export default {
     editTaskNew(id) {
       this.$emit("editTask", id);
     },
+    nextTaskNew(id) {
+      this.$emit("nextTask", id);
+    },
+    backTaskNew(id) {
+      this.$emit("backTask", id);
+    },
+  },
+  data() {
+    return {
+      styles: [
+        "container bg-danger shadow-lg border-radius",
+        "container bg-warning shadow-lg border-radius",
+        "container bg-primary shadow-lg border-radius",
+        "container bg-success shadow-lg border-radius",
+      ],
+    };
   },
 };
 </script>

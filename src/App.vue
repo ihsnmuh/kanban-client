@@ -12,6 +12,8 @@
       @fetchTasks="fetchTasks"
       @deleteTask="deleteTask"
       @editTask="getTaskById"
+      @nextTask="patchTask"
+      @backTask="patchBackTask"
     ></Home>
     <Login
       v-else-if="activePage === 'loginPage'"
@@ -126,6 +128,79 @@ export default {
         .then((response) => {
           //   console.log(response);
           console.log("Success to Update");
+          this.fetchTasks();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    patchTask(payload) {
+      let { id, category } = payload;
+      console.log(id, "INI DATA YANG DIAMBIL");
+      //   console.log("masuk di APP", id);
+
+      switch (category) {
+        case "Backlog":
+          category = "Todo";
+          break;
+        case "Todo":
+          category = "Doing";
+          break;
+        case "Doing":
+          category = "Done";
+          break;
+        default:
+          break;
+      }
+
+      axios
+        .patch(
+          `/tasks/${id}`,
+          { category },
+          {
+            headers: { access_token: localStorage.access_token },
+          }
+        )
+        .then((response) => {
+          //   console.log(response);
+          console.log("Success to Patch Next");
+          this.fetchTasks();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    patchBackTask(payload) {
+      let { id, category } = payload;
+      console.log(id, "INI DATA YANG DIAMBIL");
+      //   console.log("masuk di APP", id);
+
+      switch (category) {
+        case "Done":
+          category = "Doing";
+          break;
+        case "Doing":
+          category = "Todo";
+          break;
+        case "Todo":
+          category = "Backlog";
+          break;
+        default:
+          break;
+      }
+
+      axios
+        .patch(
+          `/tasks/${id}`,
+          { category },
+          {
+            headers: { access_token: localStorage.access_token },
+          }
+        )
+        .then((response) => {
+          //   console.log(response);
+          console.log("Success to Patch Back");
           this.fetchTasks();
         })
         .catch((err) => {

@@ -44,7 +44,6 @@
               v-model="category"
               aria-label="Floating label select example"
             >
-              <option selected>-- select category --</option>
               <option value="Backlog">Backlog</option>
               <option value="Todo">Todo</option>
               <option value="Doing">Doing</option>
@@ -58,7 +57,6 @@
               v-model="priority"
               aria-label="Floating label select example"
             >
-              <option selected>-- select level priority --</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
