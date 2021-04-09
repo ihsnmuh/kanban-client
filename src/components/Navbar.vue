@@ -81,6 +81,10 @@ export default {
       this.$emit("changePage", "loginPage");
       this.$emit("setLogin", false);
       localStorage.clear();
+      const auth2 = gapi.auth2.getAuthInstance(); // menghilngkan akses google
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
     },
   },
 };

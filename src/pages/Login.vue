@@ -40,12 +40,11 @@
                 </div>
               </form>
               <div class="col">
-                <button
-                  v-google-signin-button="clientId"
-                  class="google-signin-button"
-                >
-                  Continue with Google
-                </button>
+                <GoogleLogin
+                  :params="params"
+                  :renderParams="renderParams"
+                  :onSuccess="onSuccess"
+                ></GoogleLogin>
               </div>
             </div>
           </div>
@@ -57,12 +56,22 @@
 
 <script>
 import axios from "../api/axios";
+import GoogleLogin from "vue-google-login";
 export default {
   name: "Login",
   data() {
     return {
       email: "",
       password: "",
+      params: {
+        client_id:
+          "1001635670265-4nip5usjum1d7n51sspf6ogmi0sb92v4.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
     };
   },
   methods: {
@@ -85,6 +94,28 @@ export default {
           console.log(err, ">>>>>> ERROR LOGIN");
         });
     },
+    onSuccess(googleUser) {
+      // console.log(googleUser);
+      console.log(googleUser.getBasicProfile());
+      let id_token = googleUser.getAuthResponse().id_token;
+      console.log({ id_token }, " <<<<<<<<<<<< Ini Token dari gugel");
+
+      axios
+        .post(`/googleLogin`, { id_token })
+        .then((response) => {
+          console.log(response);
+          localStorage.setItem("access_token", response.data.access_token);
+          this.$emit("changePage", "homePage");
+          this.$emit("setLogin", true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+
+  components: {
+    GoogleLogin,
   },
 };
 </script>
