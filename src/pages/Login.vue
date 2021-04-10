@@ -32,19 +32,25 @@
                   />
                 </div>
                 <div class="row">
-                  <div class="col text-end">
+                  <div class="col d-grid gap-2">
                     <button type="submit" class="btn btn-primary">
                       Login
                     </button>
                   </div>
                 </div>
               </form>
-              <div class="col">
-                <GoogleLogin
-                  :params="params"
-                  :renderParams="renderParams"
-                  :onSuccess="onSuccess"
-                ></GoogleLogin>
+              <hr />
+              <div class="row mt-2">
+                <div class="col-3">
+                  <p>Or with :</p>
+                </div>
+                <div class="col-9">
+                  <GoogleLogin
+                    :params="params"
+                    :renderParams="renderParams"
+                    :onSuccess="onSuccess"
+                  ></GoogleLogin>
+                </div>
               </div>
             </div>
           </div>
@@ -68,8 +74,8 @@ export default {
           "1001635670265-4nip5usjum1d7n51sspf6ogmi0sb92v4.apps.googleusercontent.com",
       },
       renderParams: {
-        width: 250,
-        height: 50,
+        width: 200,
+        height: 40,
         longtitle: true,
       },
     };
@@ -89,9 +95,33 @@ export default {
           //
           this.$emit("changePage", "homePage");
           this.$emit("setLogin", true);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Login in successfully",
+          });
         })
         .catch((err) => {
           console.log(err, ">>>>>> ERROR LOGIN");
+          if (err.response.status === 400) {
+            Swal.fire({
+              title: "Invalid Email / Password!",
+              text: "Enter the correct Email / Password",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
         });
     },
     onSuccess(googleUser) {
@@ -107,6 +137,22 @@ export default {
           localStorage.setItem("access_token", response.data.access_token);
           this.$emit("changePage", "homePage");
           this.$emit("setLogin", true);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Login in successfully",
+          });
         })
         .catch((err) => {
           console.log(err);

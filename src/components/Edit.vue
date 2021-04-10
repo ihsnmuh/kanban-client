@@ -20,7 +20,12 @@
         </div>
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" v-model="dataEdit.title" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="dataEdit.title"
+              required
+            />
             <label for="floatingInput">Title Task</label>
           </div>
           <div class="form-floating mb-3">
@@ -28,6 +33,7 @@
               type="text"
               class="form-control"
               v-model="dataEdit.description"
+              required
             />
             <label for="floatingPassword">Description</label>
           </div>
@@ -36,8 +42,8 @@
               class="form-select"
               v-model="dataEdit.category"
               aria-label="Floating label select example"
+              required
             >
-              <option selected>Open this select category</option>
               <option value="Backlog">Backlog</option>
               <option value="Todo">Todo</option>
               <option value="Doing">Doing</option>
@@ -50,8 +56,8 @@
               class="form-select"
               v-model="dataEdit.priority"
               aria-label="Floating label select example"
+              required
             >
-              <option selected>Open this select Priority</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -106,8 +112,8 @@ export default {
       //kosongin lagi
       this.title = "";
       this.description = "";
-      this.category = "-- select category --";
-      this.priority = "-- select level priority --";
+      this.category = "";
+      this.priority = "";
     },
   },
   // created() {

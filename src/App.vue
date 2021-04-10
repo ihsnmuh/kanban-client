@@ -24,8 +24,9 @@
       v-else-if="activePage === 'registerPage'"
       @changePage="changePage"
     ></Register>
-    <Add @addTask="addTask"></Add>
+    <!-- Edit masih muncul pas Unauthorized tapi ngga bisa diklick juga kok -->
     <Edit @updateTask="updateTask" :dataEdit="dataEdit"></Edit>
+    <Add @addTask="addTask"></Add>
   </div>
 </template>
 
@@ -83,9 +84,31 @@ export default {
           this.tasks.push(data);
           this.changePage("homePage");
           this.fetchTasks();
+          // notif
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Add Task is successfully",
+          });
         })
         .catch((err) => {
           console.log(err, "<<<<< ERROR ADD TASK");
+          Swal.fire({
+            icon: "error",
+            title: "Please input correctly",
+            text: `${err.response.data.message}`,
+          });
         });
     },
     deleteTask(id) {
@@ -97,9 +120,31 @@ export default {
           //   console.log(response);
           console.log("Success to delete");
           this.fetchTasks();
+          // notif
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Delete is successfully",
+          });
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: "You cannot delete this Task !",
+          });
         });
     },
     getTaskById(id) {
@@ -113,6 +158,11 @@ export default {
         })
         .catch((err) => {
           console.log(err, "<<<<< INI ERROR Get ID");
+          Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: "You cannot access this Task !",
+          });
         });
     },
     updateTask(payload) {
@@ -129,9 +179,31 @@ export default {
           //   console.log(response);
           console.log("Success to Update");
           this.fetchTasks();
+          // notif
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Update is successfully",
+          });
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Please input correctly",
+            text: `${err.response.data.message}`,
+          });
         });
     },
     patchTask(payload) {
@@ -165,9 +237,31 @@ export default {
           //   console.log(response);
           console.log("Success to Patch Next");
           this.fetchTasks();
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Category has been changed",
+          });
         })
         .catch((err) => {
           console.log(err);
+          // swal(`${JSON.stringify(err.response.data.message)}`);
+          Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: `You dont have access!`,
+          });
         });
     },
 
@@ -202,9 +296,30 @@ export default {
           //   console.log(response);
           console.log("Success to Patch Back");
           this.fetchTasks();
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Category has been changed",
+          });
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Unauthorized",
+            text: `You dont have access!`,
+          });
         });
     },
   },

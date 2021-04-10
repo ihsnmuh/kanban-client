@@ -40,9 +40,11 @@
                     required
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">
-                  Submit
-                </button>
+                <div class="col d-grid gap-2">
+                  <button type="submit" class="btn btn-primary">
+                    Submit
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -74,9 +76,33 @@ export default {
         .post("/register", payload)
         .then(({ data }) => {
           this.$emit("changePage", "loginPage");
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Register in successfully",
+          });
         })
         .catch((err) => {
           console.log(err, ">>>>>> ERROR LOGIN");
+          if (err.response.status === 400) {
+            Swal.fire({
+              title: "Email / Username already exists!",
+              text: "Enter the correct Email / Username",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+          }
         })
         .then(() => {
           (this.email = ""), (this.username = ""), (this.password = "");

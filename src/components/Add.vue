@@ -21,12 +21,7 @@
 
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              v-model="title"
-              placeholder="name@example.com"
-            />
+            <input type="text" class="form-control" v-model="title" required />
             <label for="floatingInput">Title Task</label>
           </div>
           <div class="form-floating mb-3">
@@ -34,7 +29,7 @@
               type="text"
               class="form-control"
               v-model="description"
-              placeholder="Password"
+              required
             />
             <label for="floatingPassword">Description</label>
           </div>
@@ -43,6 +38,7 @@
               class="form-select"
               v-model="category"
               aria-label="Floating label select example"
+              required
             >
               <option value="Backlog">Backlog</option>
               <option value="Todo">Todo</option>
@@ -56,6 +52,7 @@
               class="form-select"
               v-model="priority"
               aria-label="Floating label select example"
+              required
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -93,8 +90,8 @@ export default {
     return {
       title: "",
       description: "",
-      category: "-- select category --",
-      priority: "-- select level priority --",
+      category: "",
+      priority: "",
     };
   },
   methods: {
@@ -106,8 +103,8 @@ export default {
       //kosongin lagi
       this.title = "";
       this.description = "";
-      this.category = "-- select category --";
-      this.priority = "-- select level priority --";
+      this.category = "";
+      this.priority = "";
     },
   },
 };

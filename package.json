@@ -19,9 +19,11 @@
   "keywords": [],
   "dependencies": {
     "axios": "^0.21.1",
+    "sweetalert2": "^10.16.0",
     "vue": "^2.6.12",
     "vue-google-login": "^2.0.5",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-sweetalert2": "^4.2.1"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.2.0",
